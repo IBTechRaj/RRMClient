@@ -7,7 +7,7 @@ function About() {
       <section id="about">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title text-center wow fadeInDown">Who We Are</h2>
+            <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Who We Are</h2>
             <p className="text-center wow fadeInDown">
               We are a group of young entrepreneurs who think of making life easier for the people of the city <br />
               This is the first step in that direction.

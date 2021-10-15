@@ -16,7 +16,10 @@
   left: 50%;
   margin-left: -70px;
   height: 4px;
-  background: #fb6a33;
+  background: #fb6a33; 
+}
+.section-title {
+  color: 'black'
 }
 
 

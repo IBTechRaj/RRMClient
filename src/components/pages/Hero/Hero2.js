@@ -8,14 +8,14 @@ import { Container, Row, Col } from 'react-bootstrap'
 import './hero.css'
 
 // var NewComponent = React.createClass({
-const Hero = () => {
+const Hero2 = () => {
   return (
 
     <section className="hero-text">
       <Row className="container text-center">
         <div className="row">
           {/* <div className="col-sm-9 text-center"> */}
-          <h2>Make your Car Shine with Our Service</h2>
+          <h2>Your Satisfaction is our Motto</h2>
           <p>
             We are the pioneers in rendering home service for your car wash.
           </p>
@@ -29,4 +29,4 @@ const Hero = () => {
   );
 }
 
-export default Hero
+export default Hero2

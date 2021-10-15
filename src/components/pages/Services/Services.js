@@ -12,10 +12,10 @@ const Services = () => {
       {/* <section id="services"> */}
       {/* <div className="container"> */}
       <div className="section-header">
-        <h2 className="section-title text-center wow fadeInDown">Services</h2>
+        <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Services</h2>
         <p className="text-center wow fadeInDown">
           Water wash <br />
-          Interial cleaning<br />
+          Interior cleaning<br />
           Fixing minor mechanical issues<br />
         </p>
       </div>

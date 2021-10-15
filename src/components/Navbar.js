@@ -36,8 +36,8 @@ function Navbar() {
         <nav className='navbar'>
           <div className='navbar-container container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-              <MdLocalCarWash className='navbar-icon' />
-              LAVISH
+              <MdLocalCarWash className='navbar-icon' style={{ fontSize: 24, color: '#fb6a33', marginBottom: '12' }} />
+              <p style={{ fontSize: 30, fontWeight: 900, color: '#fb6a33' }}>MY MOTOR WASH</p>
             </Link>
             <div className='menu-icon' onClick={handleClick}>
               {click ? <FaTimes /> : <FaBars />}
@@ -84,7 +84,7 @@ function Navbar() {
                   Gallery
                 </Link>
               </li>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link
                   to='/team'
                   className='nav-links'
@@ -92,7 +92,7 @@ function Navbar() {
                 >
                   Team
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
                 <Link
                   to='/contact'
@@ -102,7 +102,7 @@ function Navbar() {
                   Contact
                 </Link>
               </li>
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link
                   to='/register'
                   className='nav-links'
@@ -110,7 +110,7 @@ function Navbar() {
                 >
                   Register
                 </Link>
-              </li>
+              </li> */}
               <li className='nav-item'>
                 <Link
                   to='/login'
