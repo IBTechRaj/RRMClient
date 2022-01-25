@@ -1,8 +1,20 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Row } from 'react-bootstrap'
 
 import './hero.css'
 
+=======
+import { Container, Row, Col } from 'react-bootstrap'
+// import { FaHeart, FaPaintBrush, FaTimes } from 'react-icons/fa';
+// import { MdLocalCarWash, MdSettings } from 'react-icons/md';
+// import { GoPaintCan } from 'react-icons/go';
+// import { GiAutoRepair, GiLargePaintBrush, GiCrystalShine, GiTheaterCurtains } from 'react-icons/gi';
+
+import './hero.css'
+
+// var NewComponent = React.createClass({
+>>>>>>> 19c0eb53f875939c784ba7aa838d53e8fc8f88c4
 const Hero2 = () => {
   return (
 

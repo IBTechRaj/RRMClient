@@ -13,7 +13,10 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-responsive-carousel": "^3.2.21",
+<<<<<<< HEAD
     "react-responsive-modal": "^6.1.0",
+=======
+>>>>>>> 19c0eb53f875939c784ba7aa838d53e8fc8f88c4
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
