@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
-import { FaHeart, FaPaintBrush, FaTimes } from 'react-icons/fa';
+// import { FaHeart, FaPaintBrush, FaTimes } from 'react-icons/fa';
 import { MdLocalCarWash, MdSettings } from 'react-icons/md';
 // import { GoPaintCan } from 'react-icons/go';
 import { GiAutoRepair, GiLargePaintBrush, GiCrystalShine, GiTheaterCurtains } from 'react-icons/gi';
@@ -12,10 +12,10 @@ const Services = () => {
       {/* <section id="services"> */}
       {/* <div className="container"> */}
       <div className="section-header">
-        <h2 className="section-title text-center wow fadeInDown">Services</h2>
+        <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Services</h2>
         <p className="text-center wow fadeInDown">
           Water wash <br />
-          Interial cleaning<br />
+          Interior cleaning<br />
           Fixing minor mechanical issues<br />
         </p>
       </div>
@@ -26,7 +26,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <MdSettings size={50} marginTop={10} />
+                  <MdSettings size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>
@@ -44,7 +44,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <MdLocalCarWash size={50} marginTop={10} />
+                  <MdLocalCarWash size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>
@@ -62,7 +62,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <GiLargePaintBrush size={50} marginTop={10} />
+                  <GiLargePaintBrush size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>
@@ -80,7 +80,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <GiAutoRepair size={50} marginTop={10} />
+                  <GiAutoRepair size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>
@@ -98,7 +98,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <GiTheaterCurtains size={50} marginTop={10} />
+                  <GiTheaterCurtains size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>
@@ -116,7 +116,7 @@ const Services = () => {
             <Row>
               <Col xs={3} md={2}>
                 <div >
-                  <GiCrystalShine size={50} marginTop={10} />
+                  <GiCrystalShine size={50} margintop={10} />
                 </div>
               </Col>
               <Col xs={9} md={8}>

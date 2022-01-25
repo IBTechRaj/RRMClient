@@ -1,21 +1,23 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
-import { Button } from './Button';
+import { Row } from 'react-bootstrap'
+// import { Button } from '../../Button';
 import './Pricing.css';
-import { FaFire } from 'react-icons/fa';
-import { BsXDiamondFill } from 'react-icons/bs';
-import { GiCrystalize } from 'react-icons/gi';
-import { IconContext } from 'react-icons/lib';
-import { Link } from 'react-router-dom';
+// import { FaFire } from 'react-icons/fa';
+// import { BsXDiamondFill } from 'react-icons/bs';
+// import { GiCrystalize } from 'react-icons/gi';
+// import { IconContext } from 'react-icons/lib';
+// import { Link } from 'react-router-dom';
 
 const Pricing = () => {
   return (
 
 
-    <Row style={{ background: '#F4F4F5', marginTop: '16px' }}>
+    <Row style={{
+      background: '#F4F4F5'
+    }}>
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title text-center wow fadeInDown mt-4">Our Pricing</h2>
+          <h2 className="section-title text-center wow fadeInDown mt-4" style={{ color: 'black' }}>Our Pricing</h2>
           <p className="text-center wow fadeInDown">
             We tried to keep our pricing as affordable as possible. Once you get <br />
             your car serviced you will understand how reasonable our pricing is.
@@ -38,7 +40,7 @@ const Pricing = () => {
               </li>
 
               <li>
-                Tyer Change <span className="price">Rs.150</span>
+                Tyre Change <span className="price">Rs.150</span>
                 <div className="detail">Punctured tyres would be replaced</div>
               </li>
             </ul>
@@ -87,7 +89,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-    </Row>
+    </Row >
 
   )
 }

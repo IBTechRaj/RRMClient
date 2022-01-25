@@ -1,23 +1,27 @@
 import React from 'react';
+import { Container, Row, Col, Image } from 'react-bootstrap'
 
 // var NewComponent = React.createClass({
 function About() {
   return (
     <>
       <section id="about">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title text-center wow fadeInDown">Who We Are</h2>
-            <p className="text-center wow fadeInDown">
-              We are a group of young entrepreneurs who think of making life easier for the people of the city <br />
-              This is the first step in that direction.
-            </p>
-          </div>
-          <div className="row">
-            <div className="col-sm-6 wow fadeInLeft">
-              <img className="img-responsive" src="images/about.png" alt="" />
+        <Container className="container">
+          <Row className="row">
+            <div className="section-header">
+              <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Who We Are</h2>
+              <p className="text-center wow fadeInDown">
+                We are a group of young entrepreneurs who think of making life easier for the people of the city <br />
+                This is the first step in that direction.
+              </p>
             </div>
-            <div className="col-sm-6 wow fadeInRight">
+          </Row>
+          <Row >
+
+            <Col xs={6} >
+              <Image src="images/about.png" fluid />
+            </Col>
+            <Col xs={6} >
               <p>
                 It all started when our first car broke down and we had to run from pillar to post
               </p>
@@ -33,9 +37,9 @@ function About() {
                 get most of the vehicle maintenance things done at home.  This would make
                 the life a vehicle owner comfortable.
               </p>
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Container>
       </section>
     </>
   )

@@ -1,8 +1,6 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
-import { Button } from '../../Button';
+import { Row } from 'react-bootstrap'
 import './location.css';
-import { Link } from 'react-router-dom';
 
 const Location = () => {
   return (
@@ -20,10 +18,10 @@ const Location = () => {
           </div>
         </div>
       </section>
-      <div>
+      {/* <div>
         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d30457.3641564402!2d78.54611283098406!3d17.403602487626863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1610970422660!5m2!1sen!2sin" width="100%" height={450} frameBorder={0} style={{ border: 0 }} allowFullScreen aria-hidden="false" tabIndex={0} />
         &gt;
-      </div>
+      </div> */}
     </Row>
   )
 }

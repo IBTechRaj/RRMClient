@@ -46,7 +46,7 @@
   justify-content: center;
   list-style: none;
   text-align: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .nav-item {
@@ -151,3 +151,23 @@
     height: 120px;
   }
 }
+/* examples/custom-styling.css */
+/* .customOverlay {
+  background: rgba(36, 123, 160, 0.7);
+}
+.customModal {
+  background: #b2dbbf;
+  max-width: 500px;
+  width: 100%;
+}
+#login{
+    background:none;
+    color: rgb(255, 255, 255);
+    border: transparent;
+    outline: none;
+}
+
+#signup{
+    border: transparent;
+    outline: none;
+} */

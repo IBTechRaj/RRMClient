@@ -1,8 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap'
-import { Button } from '../../Button';
 import './contact.css';
-import { Link } from 'react-router-dom';
 
 const Contact = () => {
   return (
