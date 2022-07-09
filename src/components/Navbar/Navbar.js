@@ -61,7 +61,8 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           + "Team MyMotorWash"
       }
       console.log('signing up')
-      fetch("http://localhost:3001/signup", {
+      // fetch("http://localhost:3001/signup", {
+        fetch("https://mymotorwash.herokuapp.com/signup", {
         method: "post",
         headers: {
           // 'accept': 'application/json',
