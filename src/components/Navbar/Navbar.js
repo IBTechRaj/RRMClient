@@ -117,7 +117,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
         })
         .then(() => {
           const jwt = localStorage.getItem('token')
-          const url = 'http://localhost:3001/contacts'
+          const url = 'https://mymotorwash.herokuapp.com/contacts'
 
           try {
             const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
@@ -138,7 +138,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
     event.preventDefault();
     console.log('logging')
     try {
-      fetch("http://localhost:3001/login", {
+      fetch("https://mymotorwash.herokuapp.com/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
