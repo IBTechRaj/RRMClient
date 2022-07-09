@@ -1,12 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap'
 
-// var NewComponent = React.createClass({
 function About() {
   return (
     <>
       <section id="about">
-<<<<<<< HEAD:src/components/pages/About/About.js
         <Container className="container">
           <Row className="row">
             <div className="section-header">
@@ -15,19 +13,6 @@ function About() {
                 We are a group of young entrepreneurs who think of making life easier for the people of the city <br />
                 This is the first step in that direction.
               </p>
-=======
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title text-center wow fadeInDown mt-3" style={{ color: 'black' }}>Who We Are</h2>
-            <p className="text-center wow fadeInDown">
-              We are a group of young entrepreneurs who think of making life easier for the people of the city <br />
-              This is the first step in that direction.
-            </p>
-          </div>
-          <div className="row">
-            <div className="col-sm-6 wow fadeInLeft">
-              <img className="img-responsive" src="images/about.png" alt="" />
->>>>>>> 19c0eb53f875939c784ba7aa838d53e8fc8f88c4:src/components/pages/About.js
             </div>
           </Row>
           <Row >

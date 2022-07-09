@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import axios from 'axios';
-import { Button } from '../Button';
-import { Link } from 'react-router-dom';
+// import { Button } from '../Button';
+// import { BrowserRouter } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import './Navbar.css';
 import { MdLocalCarWash } from 'react-icons/md';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -11,7 +12,7 @@ import { Modal } from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 
 
-const Navbar = ({ loggedIn, setLoggedIn }) => {
+const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId, clientEmail, setClientEmail, clientName, setClientName }) => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -35,37 +36,97 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [gender, setGender] = useState('')
+  const [dob, setDob] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [pincode, setPincode] = useState('')
 
-
-  const loginData = {
-    "email": email,
-    "password": password,
-  }
-
-  const signupData = {
-    "email": email,
-    "password": password,
-  }
 
 
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
     if (password === passwordConfirmation) {
+      const emailData = {
+        "subject": 'Client Registration Success!',
+        "name": firstName,
+        "email": email,
+        "message":
+          "Dear " + firstName
+          + ",\n\n"
+          + "Thank you for registering with MyMotorWash Services. Now you can login and book your vehicle service from the convenience of your home\n"
+          + "For any queries please call Customer Care."
+          + "\n\n"
+          + "Team MyMotorWash"
+      }
       console.log('signing up')
-      try {
-        const res = await axios.post('http://localhost:3001/users ', signupData);
-        const { token, user } = res.data;
-        console.log('res', res.data);
-        if (token) {
-          setLoggedIn(true);
-          onCloseSignupModal()
-          localStorage.setItem('token', token);
-          console.log('jwt: ', token)
-        }
-      }
-      catch (error) {
-        console.log('oh, no', error);
-      }
+      fetch("http://localhost:3001/signup", {
+        method: "post",
+        headers: {
+          // 'accept': 'application/json',
+          // 'Access-Control-Allow-Origin': "*",
+          // 'content-type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Credentials': 'true',
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: {
+            "email": email,
+            "password": password,
+            "first_name": firstName,
+            "last_name": lastName,
+            "gender": gender,
+            "date_of_birth": dob,
+            "mobile": mobile,
+            "pincode": pincode,
+            "usertype": 0
+          },
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log(res.headers.get("Authorization"));
+            localStorage.setItem("token", res.headers.get("Authorization"));
+            setLoggedIn(true);
+
+            onCloseSignupModal()
+            return res.json();
+          } else {
+            console.log('Error signup')
+            onCloseSignupModal()
+            throw new Error(res);
+          }
+        })
+        .then((data) => {
+          setClientId(data.data.id)
+          if (data.data.usertype === 'client') {
+            setClient(true)
+            setClientName(data.data.first_name)
+            setClientEmail(data.data.email)
+          }
+          else if (data.data.usertype === 'sprovider') {
+            setSprovider(true)
+          } else if (data.data.usertype === 'admin') {
+            setAdmin(true)
+          }
+        })
+        .then((json) => {
+          console.dir(json)
+        })
+        .then(() => {
+          const jwt = localStorage.getItem('token')
+          const url = 'http://localhost:3001/contacts'
+
+          try {
+            const res = axios.post(url, emailData, { headers: { Authorization: `Bearer ${jwt}` } });
+            console.log('res', res);
+          }
+          catch (error) {
+            console.log('oh, no', error);
+          }
+        })
+        .catch((err) => console.error(err));
     }
     else {
       console.log('Passwords should match')
@@ -76,29 +137,57 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
     event.preventDefault();
     console.log('logging')
     try {
-      const res = await axios.post('http://localhost:3001/login ', loginData);
-      const { token, user } = res.data;
-      console.log('res', res.data);
-      if (token) {
-        setLoggedIn(true);
-        onCloseLoginModal()
-        localStorage.setItem('token', token);
-        console.log('jwt: ', token)
-      }
+      fetch("http://localhost:3001/login", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: {
+            "email": email,
+            "password": password
+          },
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log(res.headers.get("Authorization"));
+            localStorage.setItem("token", res.headers.get("Authorization"));
+            setLoggedIn(true);
+            onCloseLoginModal()
+            return res.json();
+          } else {
+            throw new Error(res);
+          }
+        })
+        .then((data) => {
+          setClientId(data.data.id)
+          console.log('data', data.data);
+          if (data.data.usertype === 'client') {
+            setClient(true)
+            setClientName(data.data.first_name)
+            setClientEmail(data.data.email)
+          }
+          else if (data.data.usertype === 'sprovider') {
+            setSprovider(true)
+          } else if (data.data.usertype === 'admin') {
+            setAdmin(true)
+          }
+        })
+        .then((json) => console.dir(json))
     }
     catch (error) {
       console.log('Err: ', error);
     }
   }
+
   const handleLogout = () => {
     delete axios.defaults.headers.common.Authorization;
     setLoggedIn(false)
+    setClient(false)
     localStorage.removeItem('token');
   }
 
-  // const handleLogout = (){
-
-  // }
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -132,13 +221,13 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 
 
               <li className='nav-item'>
-                <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                <Link to='#home' className='nav-links' onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/services'
+                  to='#services'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -147,7 +236,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/whowe'
+                  to='#about'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -156,7 +245,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/pricing'
+                  to='#pricing'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -165,7 +254,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
               </li>
               <li className='nav-item'>
                 <Link
-                  to='/gallery'
+                  to='/#gallery'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -175,7 +264,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
 
               <li className='nav-item'>
                 <Link
-                  to='/contact'
+                  to='#contact'
                   className='nav-links'
                   onClick={closeMobileMenu}
                 >
@@ -183,9 +272,7 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
                 </Link>
               </li>
 
-              {/* </ul> */}
-              {/* <ul> */}
-              {/* {(openLogin || openSignup) ? ( */}
+
               {(loggedIn) ? (
                 <li>
                   <button className='nav-links' style={{ backgroundColor: 'black', border: 'none' }} onClick={handleLogout}>Logout</button>
@@ -237,24 +324,15 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
             <input className="w-100 btn btn-custom" type="submit" />
           </label>
 
-          {/* <div>
-            or <Link to="/signup">Sign up</Link>
-          </div> */}
         </form>
       </Modal>
+
+
       <Modal open={openSignup} onClose={onCloseSignupModal} centre>
         <h2>Signup</h2>
         <form onSubmit={handleSubmitSignup}>
           <label className="justify-left w-100 px-5">
-            {/* User Name
-            <input
-              className="form-control"
-              placeholder="username"
-              type="text"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            /> */}
+
             Email
             <input
               className="form-control"
@@ -288,14 +366,82 @@ const Navbar = ({ loggedIn, setLoggedIn }) => {
                 setPasswordConfirmation(event.target.value)
               }}
             />
+            First Name
+            <input
+              className="form-control"
+              placeholder="First Name"
+              type="string"
+              name="firstname"
+              value={firstName}
+              onChange={event => {
+                setFirstName(event.target.value)
+              }}
+            />
+            Last Name
+            <input
+              className="form-control"
+              placeholder="Last Name"
+              type="string"
+              name="lastName"
+              value={lastName}
+              onChange={event => {
+                setLastName(event.target.value)
+              }}
+            />
+            Gender
+            {/* <label> */}
+            Your Gender:
+            <select value={gender} onChange={event => {
+              setGender(parseInt(event.target.value))
+            }}
+            >
+              <option value="0" >She</option>
+              <option value="1" >He</option>
+              <option value="2" >Others</option>
+            </select>
+            {/* </label> */}
+
+            Date of Birth
+            <input
+              className="form-control"
+              placeholder="Date of Birth"
+              type="date"
+              name="dob"
+              value={dob}
+              onChange={event => {
+                setDob(event.target.value)
+              }}
+            />
+            Mobile
+            <input
+              className="form-control"
+              placeholder="Mobile"
+              type="string"
+              name="mopbile"
+              value={mobile}
+              onChange={event => {
+                setMobile(event.target.value)
+              }}
+            />
+            Pincode
+            <input
+              className="form-control"
+              placeholder="Pincode"
+              type="string"
+              name="pincode"
+              value={pincode}
+              onChange={event => {
+                setPincode(event.target.value)
+              }}
+            />
           </label>
 
           <label className="justify-left w-100 px-5">
             {' '}
             <input className="w-100 btn btn-custom" type="submit" />
           </label>
-        </form>
-      </Modal>
+        </form >
+      </Modal >
 
     </>
   );
