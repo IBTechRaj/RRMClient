@@ -125,7 +125,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           }
           catch (error) {
             console.log('oh, no', error);
-          }
+          } 
         })
         .catch((err) => console.error(err));
     }
