@@ -25,7 +25,7 @@ export default function ServiceDetails(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/}` : `http://localhost:3001/services/`
+  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
   const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
   const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
 
@@ -122,11 +122,11 @@ export default function ServiceDetails(props) {
               {serviceData &&
                 serviceData.map(({ id, sname, price, offerprice, description }) => (
                   <li key={id}>
-                    <h5> {sname},  {'   '} Price: {price}, {'   '} Offer Price: {offerprice}, {'   '} Description: {description}
+                    <p> {sname},  {'   '} Price: {price}, {'   '} Offer Price: {offerprice}, {'   '} Description: {description}
                       <Button
                         size="small"
                         variant="contained"
-                        onClick={() => handleDelete(id)}>Delete</Button></h5>
+                        onClick={() => handleDelete(id)}>Delete</Button></p>
                   </li>
 
                 ))}
