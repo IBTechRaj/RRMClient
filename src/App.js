@@ -7,6 +7,8 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Booking from './components/Bookings/Booking';
 import Admin from './components/Admin/Admin';
+import ForgotPassword from './components/Navbar/ForgotPassword';
+import PasswordReset from './components/Navbar/PasswordReset';
 // import Contact from './components/pages/Contact/Contact'
 
 
@@ -39,6 +41,8 @@ function App() {
       <Switch>
         <Route path='/' exact component={Home} />
         {/* <Route path='/Contact' exact component={Contact} /> */}
+        <Route path='/ForgotPassword' exact component={ForgotPassword} />
+        <Route path='/PasswordReset' exact component={PasswordReset} />
       </Switch>
       <Footer />
     </Router>

@@ -13,7 +13,7 @@ import 'react-responsive-modal/styles.css';
 
 
 const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovider, admin, setAdmin, clientId, setClientId, clientEmail, setClientEmail, clientName, setClientName }) => {
-  
+
   // const server = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com` : `http://localhost:3001`
 
   const [click, setClick] = useState(false);
@@ -24,9 +24,17 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
 
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+  const [openForgot, setOpenForgot] = useState(false);
 
   const onOpenLoginModal = () => {
     setOpenLogin(true);
+  }
+
+  const onOpenForgotModal = () => {
+    setOpenForgot(true);
+  }
+  const onCloseForgotModal = () => {
+    setOpenForgot(false);
 
   }
   const onCloseLoginModal = () => setOpenLogin(false);
@@ -46,7 +54,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   const [mobile, setMobile] = useState('')
   const [pincode, setPincode] = useState('')
 
-
+  const [forgotEmail, setForgotEmail] = useState('')
 
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
@@ -67,7 +75,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
       const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/signup` : `http://localhost:3001/signup`
 
       // fetch("http://localhost:3001/signup", {
-        fetch(signUpUrl, {
+      fetch(signUpUrl, {
         method: "post",
         headers: {
           // 'accept': 'application/json',
@@ -133,7 +141,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           }
           catch (error) {
             console.log('oh, no', error);
-          } 
+          }
         })
         .catch((err) => console.error(err));
     }
@@ -144,12 +152,12 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
 
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
-    console.log('logging')
+    console.log('logging', process.env.REACT_APP_SERVER)
     const loginUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/login` : `http://localhost:3001/login`
 
     try {
       fetch(loginUrl, {
-        method: "post", 
+        method: "post",
         headers: {
           "Content-Type": "application/json",
         },
@@ -185,6 +193,47 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             setAdmin(true)
             setClientName(data.data.first_name)
           }
+        })
+        .then((json) => console.dir(json))
+    }
+    catch (error) {
+      console.log('Err: ', error);
+    }
+  }
+
+  const emdata = {
+    email: forgotEmail
+  }
+  const handleSubmitForgotPassword = async (event) => {
+    event.preventDefault();
+    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/forgot_password` : `http://localhost:3001/forgot_password`
+
+    console.log('forgot 1', forgotUrl)
+
+    try {
+      fetch(forgotUrl, {
+        // credentials: "include",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(emdata)
+      })
+        .then((res) => {
+          if (res.status == 200) {
+            console.log("forgot email posted", res)
+            alert('Password reset link sent to your email')
+            setOpenForgot(false)
+            return res.json();
+          } else {
+            alert('We could not find this email in our system')
+            setOpenForgot(false)
+            throw new Error(res);
+          }
+
+        })
+        .then((data) => {
+          console.log('d', data)
         })
         .then((json) => console.dir(json))
     }
@@ -331,13 +380,72 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
               }}
             />
           </label>
+          <Link
+            to={'/ForgotPassword'}
+            // className='nav-links'
+            color='black'
+            onClick={
+              onCloseLoginModal
+
+
+
+            }
+          >
+            Forgot Password
+          </Link>
+          {/* <Link
+            to='/PasswordReset'
+            color='black'>
+            Reset Password</Link> */}
           <br /><br />
           <label className="justify-left w-100 px-5">
             {' '}
-            <input className="w-100 btn btn-custom" type="submit" />
+            <input className="w-100 btn btn-primary" type="submit" />
           </label>
 
         </form>
+
+      </Modal>
+
+      <Modal open={openForgot} onClose={onCloseForgotModal} centre>
+        <h5>Enter your Email</h5>
+        <form onSubmit={handleSubmitForgotPassword}>
+          <label className="justify-left w-100 px-5">
+            <input
+              className="form-control"
+              placeholder="email"
+              type="text"
+              name="forgotEmail"
+              value={forgotEmail}
+              onChange={event => {
+                setForgotEmail(event.target.value)
+              }}
+            />
+            <br />
+            {/* <input
+              className="form-control"
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={event => {
+                setPassword(event.target.value)
+              }}
+            /> */}
+          </label>
+
+          <br /><br />
+          <label className="justify-left w-100 px-5">
+            {' '}
+            <input className="w-100 btn btn-primary" type="submit" />
+          </label>
+          We shall send Reset Password Link to this email if it is valid.
+        </form>
+        After you receive the reset link, click here to <Link
+          to='/PasswordReset'
+          color='black'
+          onClick={onCloseForgotModal}>
+          Reset Password</Link> .
       </Modal>
 
 
