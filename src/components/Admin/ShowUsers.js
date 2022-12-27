@@ -17,7 +17,7 @@ export default function ShowUsers(props) {
 
   const [usersData, setUsersData] = useState(null);
 
-  const usersUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/list_users/` : `http://localhost:3001/list_users/`
+  const usersUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/list_users/` : `http://localhost:3001/list_users/`
 
   const getUsers = () => {
     axios.get(usersUrl,)

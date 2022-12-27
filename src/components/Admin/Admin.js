@@ -8,6 +8,7 @@ import ServiceDetails from './ServiceDetails'
 import ServiceAgents from './ServiceAgents'
 import ShowUsers from './ShowUsers'
 import Bookings from './Bookings'
+import AddAreas from './AddAreas'
 
 export default function Admin(props) {
   console.log('prop', props)
@@ -15,6 +16,8 @@ export default function Admin(props) {
   const [showServiceAgents, setShowServiceAgents] = useState(false)
   const [showUsers, setShowUsers] = useState(false)
   const [showBookings, setShowBookings] = useState(false)
+
+  const [showAddAreas, setShowAddAreas] = useState(false)
 
   const closeServices = () => {
     setShowServices(false)
@@ -27,6 +30,10 @@ export default function Admin(props) {
   };
   const closeBookings = () => {
     setShowBookings(false)
+  };
+
+  const closeAddAreas = () => {
+    setShowAddAreas(false)
   };
 
   return (
@@ -104,6 +111,21 @@ export default function Admin(props) {
             View Bookings
           </Button>
 
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, mr: 5, ml: 5 }}
+            onClick={() => {
+              setShowAddAreas(true)
+              setShowServices(false)
+              setShowBookings(false)
+              setShowServiceAgents(false)
+              setShowUsers(false)
+            }}
+          >
+            Add Areas
+          </Button>
         </ButtonGroup>
 
 
@@ -118,6 +140,10 @@ export default function Admin(props) {
         }
         {showBookings &&
           <Bookings onClose={closeBookings} />
+        }
+
+        {showAddAreas &&
+          <AddAreas onClose={closeAddAreas} />
         }
       </Container>
     </div >

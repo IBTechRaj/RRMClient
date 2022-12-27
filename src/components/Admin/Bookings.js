@@ -12,7 +12,7 @@ export default function Bookings(props) {
 
   const [bookingsData, setBookingsData] = useState([]);
 
-  const bookingsUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/bookings/` : `http://localhost:3001/bookings/`
+  const bookingsUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/bookings/` : `http://localhost:3001/bookings/`
 
   const getBookings = () => {
     axios.get(bookingsUrl,)

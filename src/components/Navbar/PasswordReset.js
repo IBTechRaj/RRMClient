@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 const PasswordReset = () => {
 
-  const baseURL = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/` : `http://localhost:3001/`
+  const baseURL = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/` : `http://localhost:3001/`
 
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')

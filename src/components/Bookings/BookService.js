@@ -55,7 +55,7 @@ export default function Elevation(props) {
     setPincode(e.target.value)
   }
 
-  const areasUrl = 'https://mymotorwash.herokuapp.com/areas'
+  const areasUrl = 'https://motorwash-backend-lfxt.onrender.com/areas'
   useEffect(() => {
     axios.get(areasUrl,
     )
@@ -100,7 +100,7 @@ export default function Elevation(props) {
     }
 
     const jwt = localStorage.getItem('token');
-    const bkgUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/bookings` : `http://localhost:3001/bookings`
+    const bkgUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/bookings` : `http://localhost:3001/bookings`
 
     // const bkgUrl = 'https://mymotorwash.herokuapp.com/bookings';
 
@@ -115,7 +115,7 @@ export default function Elevation(props) {
       })
       .then(() => {
         const jwt = localStorage.getItem('token')
-        const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+        const contactUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/contacts` : `http://localhost:3001/contacts`
 
         // const url = 'https://mymotorwash.herokuapp.com/contacts'
 

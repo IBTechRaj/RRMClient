@@ -16,7 +16,7 @@ export default function ServiceAgents(props) {
 
   const [agentsData, setAgentsData] = useState(null);
 
-  const agentsUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/list_agents/` : `http://localhost:3001/list_agents/`
+  const agentsUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/list_agents/` : `http://localhost:3001/list_agents/`
 
   const getAgents = () => {
     axios.get(agentsUrl,)

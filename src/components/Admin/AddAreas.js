@@ -12,83 +12,82 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-export default function ServiceDetails(props) {
+export default function AddAreas(props) {
 
   console.log('admin')
   // const { spSalonId } = props
-  const [serviceName, setServiceName] = useState("")
-  // const [serviceDuration, setServiceDuration] = useState("")
-  const [servicePrice, setServicePrice] = useState(0)
-  const [serviceOfferPrice, setServiceOfferPrice] = useState(0);
-  const [description, setDescription] = useState('')
-  const [serviceData, setServiceData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [pincode, setPincode] = useState(0)
+  const [areaAgent, setAreaAgent] = useState(0)
+  // const [serviceOfferPrice, setServiceOfferPrice] = useState(0);
+  // const [description, setDescription] = useState('')
+  // const [serviceData, setServiceData] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/services/` : `http://localhost:3001/services/`
-  const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/services/` : `http://localhost:3001/services/`
-  const serviceAddUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/services/` : `http://localhost:3001/services/`
+  // const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
+  // const serviceDelUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/services/` : `http://localhost:3001/services/`
+  const serviceAreaAddUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/areas/` : `http://localhost:3001/areas/`
 
 
   const jwt = localStorage.getItem('token');
 
-  const getServices = () => {
-    axios.get(servicesUrl, {
-      headers: { Authorization: `Bearer ${jwt}` },
-    })
-      .then(response => {
-        console.log('res.dat', response.data)
-        setServiceData(response.data)
-      })
-  }
-  useEffect(() => {
+  // const getServices = () => {
+  //   axios.get(servicesUrl, {
+  //     headers: { Authorization: `Bearer ${jwt}` },
+  //   })
+  //     .then(response => {
+  //       console.log('res.dat', response.data)
+  //       setServiceData(response.data)
+  //     })
+  // }
+  // useEffect(() => {
 
-    getServices()
-  }, [])
-  const service = {
-    sname: serviceName,
-    price: servicePrice,
-    offerprice: serviceOfferPrice,
-    description: description
+  //   getServices()
+  // }, [])
+  const area = {
+    pincode: pincode,
+    user_id: areaAgent,
+    // offerprice: serviceOfferPrice,
+    // description: description
   }
 
-  const handleServiceSubmit = (e) => {
+  const handleAddAreaSubmit = (e) => {
     e.preventDefault();
-    console.log('servicesData', service)
+    console.log('AreaData', area)
 
     // const servicesUrl = (process.env.REACT_APP_SERVER) ? `https://groomserver.herokuapp.com/services` : `http://localhost:3001/services`
 
-    axios.post(serviceAddUrl, service, {
+    axios.post(serviceAreaAddUrl, area, {
       headers: { Authorization: `Bearer ${jwt}` },
     })
       .then(response => {
         if (response.status === 201) {
-          console.log('Service Added')
-          setServiceName('')
-          setServicePrice(0)
-          setServiceOfferPrice(0)
-          getServices()
+          console.log('Service Area Added')
+          setPincode(0)
+          setAreaAgent(0)
+          // setServiceOfferPrice(0)
+          // getServices()
         }
       })
 
   };
 
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(
-        serviceDelUrl + id
-      );
-      console.log('del', response)
-      getServices()
-      setError(null);
-    } catch (err) {
-      console.log('e', err.message)
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  }
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await axios.delete(
+  //       serviceDelUrl + id
+  //     );
+  //     console.log('del', response)
+  //     getServices()
+  //     setError(null);
+  //   } catch (err) {
+  //     console.log('e', err.message)
+  //     setError(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
 
   const theme = createTheme();
 
@@ -111,13 +110,13 @@ export default function ServiceDetails(props) {
             <MiscellaneousServicesOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Add/Delete Your Services Details
+            Add  Service Area
           </Typography>
-          <Typography component="div" variant="subtitle1">
+          {/* <Typography component="div" variant="subtitle1">
             These are the services you are offering at present
-          </Typography>
+          </Typography> */}
           <hr></hr>
-          <Typography component="div" variant="subtitle1">
+          {/* <Typography component="div" variant="subtitle1">
             <ul>
               {serviceData &&
                 serviceData.map(({ id, sname, price, offerprice, description }) => (
@@ -131,20 +130,20 @@ export default function ServiceDetails(props) {
 
                 ))}
             </ul>
-          </Typography>
+          </Typography> */}
         </Box>
 
-        <Box component="form" noValidate onSubmit={handleServiceSubmit} sx={{ mt: 3, alignItems: 'center' }}>
+        <Box component="form" noValidate onSubmit={handleAddAreaSubmit} sx={{ mt: 3, alignItems: 'center' }}>
           <Grid container spacing={2}>
             <Grid item xs={8} sm={4} md={3}>
               <TextField
                 required
                 fullWidth
-                id="service_name"
-                label="Service Name"
-                value={serviceName}
+                id="pincode"
+                label="Service Area Pincode"
+                value={pincode}
                 onChange={event => {
-                  setServiceName(event.target.value)
+                  setPincode(event.target.value)
                 }}
               />
             </Grid>
@@ -153,16 +152,16 @@ export default function ServiceDetails(props) {
               <TextField
                 required
                 fullWidth
-                id="price"
-                label="Price"
-                value={servicePrice}
+                id="areaAgent"
+                label="Area Agent Code"
+                value={areaAgent}
                 onChange={event => {
-                  setServicePrice(event.target.value)
+                  setAreaAgent(event.target.value)
                 }}
               />
             </Grid>
 
-            <Grid item xs={8} sm={4} md={3}>
+            {/* <Grid item xs={8} sm={4} md={3}>
               <TextField
                 required
                 fullWidth
@@ -173,9 +172,9 @@ export default function ServiceDetails(props) {
                   setServiceOfferPrice(event.target.value)
                 }}
               />
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={8} sm={4} md={3}>
+            {/* <Grid item xs={8} sm={4} md={3}>
               <TextField
                 required
                 fullWidth
@@ -186,7 +185,7 @@ export default function ServiceDetails(props) {
                   setDescription(event.target.value)
                 }}
               />
-            </Grid>
+            </Grid> */}
 
           </Grid>
           <Button

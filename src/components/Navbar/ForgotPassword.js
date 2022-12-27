@@ -29,7 +29,7 @@ const ForgotPassword = () => {
 
     const handleSubmitForgotPassword = async (event) => {
         event.preventDefault();
-        const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/forgot_password` : `http://localhost:3001/forgot_password`
+        const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
 
         console.log('forgot 1', forgotUrl)
 

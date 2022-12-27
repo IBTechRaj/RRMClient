@@ -81,7 +81,7 @@ const Contact = () => {
     //     const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
 
 
-    const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+    const contactUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/contacts` : `http://localhost:3001/contacts`
 
     try {
       const res = axios.post(contactUrl, emailEnquiryData,

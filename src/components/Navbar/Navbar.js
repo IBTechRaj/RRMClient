@@ -53,6 +53,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   const [dob, setDob] = useState('')
   const [mobile, setMobile] = useState('')
   const [pincode, setPincode] = useState('')
+  const [userType, setUserType] = useState(0)
 
   const [forgotEmail, setForgotEmail] = useState('')
 
@@ -72,7 +73,17 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
           + "Team MyMotorWash"
       }
       console.log('signing up')
-      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/signup` : `http://localhost:3001/signup`
+      // const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/signup` : `http://localhost:3001/signup`
+      const signUpUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/signup` : `http://localhost:3001/signup`
+      // setUserType(0)
+      // if (email === "mmnirmalk@gmail.com") {
+      //   setUserType(2)
+      //   console.log("ut 2", email, userType)
+      // }
+      // if (email === "raj@raj.com") {
+      //   setUserType(1)
+      //   console.log("ut 1", userType)
+      // }
 
       // fetch("http://localhost:3001/signup", {
       fetch(signUpUrl, {
@@ -94,7 +105,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             "date_of_birth": dob,
             "mobile": mobile,
             "pincode": pincode,
-            "usertype": 0
+            "usertype": 0,
           },
         }),
       })
@@ -103,7 +114,8 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
-
+            setEmail('')
+            console.log('user', userType)
             onCloseSignupModal()
             return res.json();
           } else {
@@ -132,7 +144,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
         .then(() => {
           const jwt = localStorage.getItem('token')
           // const contacturl = 'server/contacts'
-          const contactUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/contacts` : `http://localhost:3001/contacts`
+          const contactUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/contacts` : `http://localhost:3001/contacts`
 
 
           try {
@@ -153,7 +165,10 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
     console.log('logging', process.env.REACT_APP_SERVER)
-    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/login` : `http://localhost:3001/login`
+    // const loginUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/login` : `http://localhost:3001/login`
+    // const loginUrl = (process.env.REACT_APP_SERVER) ? `https://stingray-app-pdhrt.ondigitalocean.app/login` : `http://localhost:3001/login`
+    const loginUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/login` : `http://localhost:3001/login`
+
 
     try {
       fetch(loginUrl, {
@@ -173,9 +188,11 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
+            setEmail('')
             onCloseLoginModal()
             return res.json();
           } else {
+            console.log(res)
             throw new Error(res);
           }
         })
@@ -206,7 +223,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   }
   const handleSubmitForgotPassword = async (event) => {
     event.preventDefault();
-    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://mymotorwash.herokuapp.com/forgot_password` : `http://localhost:3001/forgot_password`
+    const forgotUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/forgot_password` : `http://localhost:3001/forgot_password`
 
     console.log('forgot 1', forgotUrl)
 
@@ -220,7 +237,7 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
         body: JSON.stringify(emdata)
       })
         .then((res) => {
-          if (res.status == 200) {
+          if (res.status === 200) {
             console.log("forgot email posted", res)
             alert('Password reset link sent to your email')
             setOpenForgot(false)
