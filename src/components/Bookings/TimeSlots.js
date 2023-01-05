@@ -51,7 +51,7 @@ export default function ResponsiveGrid(props) {
   }
 
   const classes = useStyles()
-  const [reserved, setReserved] = useState([])
+  const [reserved, setReserved] = useState(['00.00'])
 
   const getApptTime = (tmslot) => {
     if (reserved.includes(tmslot)) {
@@ -65,7 +65,7 @@ export default function ResponsiveGrid(props) {
 
   useEffect(() => {
     // const jwt = localStorage.getItem('token');
-    const apptUrl = `https://motorwash-backend-lfxt.onrender.com/bookings/${props.startDate.toUTCString()}/${props.pincode}`;
+    const apptUrl = (process.env.REACT_APP_SERVER) ? `https://motorwash-backend-lfxt.onrender.com/bookings/${props.startDate.toUTCString()}/${props.pincode}` : `http://localhost:3001/bookings/${props.startDate.toUTCString()}/${props.pincode}`;
 
     const getCurrentAppts = async () => {
       try {
@@ -74,6 +74,7 @@ export default function ResponsiveGrid(props) {
         )
           .then(response => {
             if (response.status === 200) {
+              console.log('y res')
               const ampm = response.data.map((tm) => {
                 let H = tm.substr(0, 2)
                 let h = H % 12 || 12
@@ -83,9 +84,11 @@ export default function ResponsiveGrid(props) {
               })
               setReserved(ampm)
             }
+
+            console.log('n res')
           })
       } catch (err) {
-        setReserved(null);
+        setReserved('00.00');
       }
     }
     getCurrentAppts()

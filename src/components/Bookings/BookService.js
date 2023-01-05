@@ -55,13 +55,15 @@ export default function Elevation(props) {
     setPincode(e.target.value)
   }
 
-  const areasUrl = 'https://motorwash-backend-lfxt.onrender.com/areas'
+  const areasUrl = 'http://localhost:3001/areas' // 'https://motorwash-backend-lfxt.onrender.com/areas'
   useEffect(() => {
     axios.get(areasUrl,
     )
       .then(({ data }) => {
         setAreas(data)
       })
+
+    console.log('ars', areas)
   }, [])
 
   const setDateShowTime = () => {
@@ -136,6 +138,8 @@ export default function Elevation(props) {
     >
       <Grid item  >
         <ThemeProvider theme={lightTheme}>
+
+          {console.log('ars2', areas)}
           <Box
             sx={{
               p: 2,
