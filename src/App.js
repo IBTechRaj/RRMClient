@@ -34,9 +34,9 @@ function App() {
         setSprovider={setSprovider}
         setAdmin={setAdmin}
         clientId={clientId} setClientId={setClientId} />
-      {console.log('cl', client)}
+      {/* {console.log('cl', client)} */}
       {client ? (<Booking clientId={clientId} clientEmail={clientEmail} clientName={clientName} />) : (null)}
-      {console.log('cl, adm,name', client, admin, clientName)}
+      {/* {console.log('cl, adm,name', client, admin, clientName)} */}
       {admin ? (<Admin clientName={clientName} />) : (null)}
       <Switch>
         <Route path='/' exact component={Home} />

@@ -35,7 +35,6 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
   }
   const onCloseForgotModal = () => {
     setOpenForgot(false);
-
   }
   const onCloseLoginModal = () => setOpenLogin(false);
   const onOpenSignupModal = () => {
@@ -185,20 +184,23 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
       })
         .then((res) => {
           if (res.ok) {
-            console.log(res.headers.get("Authorization"));
+            // console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
             setEmail('')
             onCloseLoginModal()
-            return res.json();
+            // return res.json();
           } else {
-            console.log(res)
-            throw new Error(res);
+            // console.log(res)
+            alert('Invlid login id or password')
+
+            onCloseLoginModal()
+            // throw new Error(res);
           }
         })
         .then((data) => {
           setClientId(data.data.id)
-          console.log('data', data.data);
+          // console.log('data', data.data);
           if (data.data.usertype === 'client') {
             setClient(true)
             setClientName(data.data.first_name)
@@ -211,10 +213,10 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
             setClientName(data.data.first_name)
           }
         })
-        .then((json) => console.dir(json))
+      // .then((json) => console.dir(json))
     }
     catch (error) {
-      console.log('Err: ', error);
+      // console.log('Err: ', error);
     }
   }
 

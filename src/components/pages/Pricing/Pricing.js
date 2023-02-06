@@ -18,7 +18,7 @@ const Pricing = () => {
       // }
     )
       .then(response => {
-        console.log('res.dat', response.data)
+        // console.log('res.dat', response.data)
         setServiceData(response.data)
       })
   }
