@@ -184,12 +184,12 @@ const Navbar = ({ loggedIn, setLoggedIn, client, setClient, sprovider, setSprovi
       })
         .then((res) => {
           if (res.ok) {
-            // console.log(res.headers.get("Authorization"));
+            console.log(res.headers.get("Authorization"));
             localStorage.setItem("token", res.headers.get("Authorization"));
             setLoggedIn(true);
             setEmail('')
             onCloseLoginModal()
-            // return res.json();
+            return res.json();
           } else {
             // console.log(res)
             alert('Invlid login id or password')
